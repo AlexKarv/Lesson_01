@@ -40,7 +40,6 @@ public class BaseLoginTest {
 
     }
 
-
     @AfterClass
     public void afterClass() {
         if (driver != null)
