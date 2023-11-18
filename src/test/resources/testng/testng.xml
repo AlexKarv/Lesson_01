@@ -5,7 +5,7 @@
 
         <classes>
             <class name="HM2.AlertClass"/>
-            <class name="HM2.FramesTests"/>
+            <class name="lesson_4.FramesTests"/>
         </classes>
     </test>
 </suite>

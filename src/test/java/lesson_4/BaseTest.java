@@ -1,7 +1,7 @@
-package HM2;
+package lesson_4;
 
+import org.example.uitests.browser.WebDriverFactory;
 import org.openqa.selenium.WebDriver;
-import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.annotations.AfterClass;
 import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeClass;
@@ -11,9 +11,13 @@ import java.util.concurrent.TimeUnit;
 
 public class BaseTest {
     public WebDriver driver;
+
     @BeforeClass
     public void beforeClass() {
-        driver = new ChromeDriver();
+        // driver = new ChromeDriver();
+        //
+        //  System.setProperty("browser", "chrome");
+        driver = WebDriverFactory.getDriver();
         driver.manage().window().maximize();
         System.out.println("before class");
     }
@@ -27,7 +31,7 @@ public class BaseTest {
     }
 
     @AfterMethod
-    public void AfterMethod () {
+    public void AfterMethod() {
         System.out.println("after method");
     }
 
@@ -38,8 +42,6 @@ public class BaseTest {
             driver.quit();
         System.out.println("after class");
     }
-
-
 
 
 }

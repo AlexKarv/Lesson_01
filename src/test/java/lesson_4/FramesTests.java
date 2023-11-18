@@ -1,4 +1,4 @@
-package HM2;
+package lesson_4;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;

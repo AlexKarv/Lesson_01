@@ -1,5 +1,6 @@
 package HM2;
 
+import lesson_4.BaseTest;
 import org.openqa.selenium.Alert;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
