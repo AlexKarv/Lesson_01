@@ -5,6 +5,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
+import org.testng.annotations.AfterClass;
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
@@ -16,6 +17,7 @@ public class LoginTest {
     private static final String USER_NAME = "performance_glitch_user";
     private static final String USER_PASS = "secret_sauce";
     private static final String USER_PASS_NEG = "secret_sauc";
+
 
     @BeforeClass
     public void beforeClass() {
@@ -31,29 +33,45 @@ public class LoginTest {
         userPasswordField.sendKeys(USER_PASS);
         WebElement buttonLoggin = driver.findElement(By.xpath("//input[@id='login-button']"));
         buttonLoggin.click();
-    }
-
-//    @BeforeMethod
-//    public void beforeMethod() {
-//        driver.get("https://www.saucedemo.com/v1/index.html");
-//    }
-
-    @Test
-    public void loginTestWithXpathPositive() {
         Assert.assertTrue(driver.findElement(By.xpath("//div[@class='header_secondary_container']")).
                 getText().contains("Prod"));
     }
 
     @Test
     public void loginTestWithXpathPositiveAddToBasket() throws InterruptedException {
+
         //Assert.assertTrue(driver.findElement(By.xpath("//div[@class='header_secondary_container']")).getText().contains("Prod"));
         WebElement buttonBusket = driver.findElement(By.xpath("//*[name()='path' and contains(@fill,'currentCol')]"));
-
         buttonBusket.click();
-        //Thread.sleep(5000);
-//        WebElement buttonRemove = driver.findElement(By.xpath("//button[@class='btn_secondary cart_button']"));
+        Thread.sleep(5000);
+        //List<WebElement> car_items = driver.findElements(By.xpath(//div[@class='cart_item']));
+
+        // WebElement buttonRemove = null;
+//        try {
+//            buttonRemove = driver.findElement(By.xpath("//button[@class='btn_secondary cart_button']"));
+//            while (buttonRemove.isDisplayed()) {
+//                buttonRemove.click();
+//            }
+//        } catch (Exception e) {
+//            throw new NoSuchElementException();
+//        }
+
+
+
         WebElement buttonSendwich = driver.findElement(By.xpath("//button[normalize-space()='Open Menu']"));
         WebElement buttonAllitems = driver.findElement(By.xpath("//a[@id='inventory_sidebar_link']"));
+
+
+        //WebElement cart_list = driver.findElement(By.xpath(//div[@class='cart_list']));
+
+
+//        cart_list = driver.find_element(By.XPATH, "//div[@class='cart_list']")
+//
+//# Находим все элементы cart_item внутри cart_list с использованием XPath
+//                cart_items = cart_list.find_elements(By.XPATH, "//div[@class='cart_item']")
+//
+//# Помещаем все элементы cart_item в список
+//        cart_items_list = list(cart_items)
 
 //        if (buttonRemove.isDisplayed()) {
 //            while (true) {
@@ -62,65 +80,54 @@ public class LoginTest {
 //        }
 //        if (!buttonRemove.isDisplayed()) {
         buttonSendwich.click();
-        //Thread.sleep(5000);
         buttonAllitems.click();
-        //Thread.sleep(5000);
         List<WebElement> products = driver.findElements(By.xpath("//div[@class='inventory_item']"));
-//        for (WebElement product : products) {
-//
-//            System.out.println("Наименование товара: " + product.getText());
-//        }
+
         WebElement selectedProduct = null;
         if (!products.isEmpty()) {
             selectedProduct = products.get(0);
             WebElement buttonInFirstProduct = driver.findElement(By.
                     xpath("//div[@class='inventory_list']//div[1]//div[3]//button[1]"));
-            //WebElement buttonInFirstProduct1 = selectedProduct.findElement(By.tagName("button"));
             buttonInFirstProduct.click();
-            //  Thread.sleep(5000);
         } else {
             System.out.println("Not found products");
         }
-        //System.out.println("Selected product" + selectedProduct.getText());
-        driver.navigate().refresh();
-        Thread.sleep(5000);
-        buttonBusket = driver.findElement(By.xpath("//*[name()='path' and contains(@fill,'currentCol')]"));
-        buttonBusket.click();
-        Thread.sleep(5000);
-        WebElement productInBusket = driver.findElement(By.xpath("//div[@class='inventory_item_name']"));
-        //System.out.println("Product in busket   " + productInBusket.getText());
         String selProd = "";
-        String buskProd = "";
-//        if (selectedProduct != null) {
-//            selProd = selectedProduct.getText();
-//            System.out.println("Selected product: " + selProd);
-//        } else {
-//            System.out.println("no such element");
-//        }
-
-        if (productInBusket != null) {
-
-            buskProd = productInBusket.getText();
-
-            System.out.println("Selected product: " + buskProd);
+        if (selectedProduct != null) {
+            selProd = selectedProduct.getText();
         } else {
             System.out.println("no such element");
         }
+        WebElement findSeldPrice = driver.findElement(By.xpath("//div[@class='inventory_item_price']"));
+        String findSeldPriceWithout$ = findSeldPrice.getText().toString().replace("$", "");
+        System.out.println("findSeldPriceWithout$ :" + findSeldPriceWithout$);
 
-
-
-
-
-
+        buttonBusket = driver.findElement(By.xpath("//*[name()='path' and contains(@fill,'currentCol')]"));
+        buttonBusket.click();
+        WebElement productInBusket = driver.findElement(By.xpath("//div[@class='inventory_item_name']"));
+        String buskProd = "";
+        if (productInBusket != null) {
+            buskProd = productInBusket.getText();
+        } else {
+            System.out.println("no such element");
+        }
+        WebElement findBuskProd = driver.findElement(By.xpath("//div[@class='inventory_item_price']"));
+        String findBuskProdPrice = findBuskProd.getText();
+        System.out.println("findBuskProdPrice: " + findBuskProdPrice);
 
         Assert.assertTrue(selProd.contains(buskProd));
-
+        Assert.assertEquals(findSeldPriceWithout$, findBuskProdPrice);
+        buttonSendwich = driver.findElement(By.xpath("//button[normalize-space()='Open Menu']"));
+        buttonSendwich.click();
+        WebElement buttonLogOut = driver.findElement(By.xpath("//a[@id='logout_sidebar_link']"));
+        buttonLogOut.click();
+        WebElement buttonLoggin = driver.findElement(By.xpath("//input[@id='login-button']"));
+        Assert.assertEquals(buttonLoggin.getAttribute("value"), "LOGIN");
     }
 
-
-//    @AfterClass
-//    public void afterClass() {
-//        if (driver != null)
-//            driver.quit();
-//    }
+    @AfterClass
+    public void afterClass() {
+        if (driver != null)
+            driver.quit();
+    }
 }
