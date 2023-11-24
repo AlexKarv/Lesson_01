@@ -44,41 +44,17 @@ public class LoginTest {
         WebElement buttonBusket = driver.findElement(By.xpath("//*[name()='path' and contains(@fill,'currentCol')]"));
         buttonBusket.click();
         Thread.sleep(5000);
-        //List<WebElement> car_items = driver.findElements(By.xpath(//div[@class='cart_item']));
-
-        // WebElement buttonRemove = null;
-//        try {
-//            buttonRemove = driver.findElement(By.xpath("//button[@class='btn_secondary cart_button']"));
-//            while (buttonRemove.isDisplayed()) {
-//                buttonRemove.click();
-//            }
-//        } catch (Exception e) {
-//            throw new NoSuchElementException();
-//        }
-
-
 
         WebElement buttonSendwich = driver.findElement(By.xpath("//button[normalize-space()='Open Menu']"));
         WebElement buttonAllitems = driver.findElement(By.xpath("//a[@id='inventory_sidebar_link']"));
 
-
-        //WebElement cart_list = driver.findElement(By.xpath(//div[@class='cart_list']));
-
-
-//        cart_list = driver.find_element(By.XPATH, "//div[@class='cart_list']")
-//
-//# Находим все элементы cart_item внутри cart_list с использованием XPath
-//                cart_items = cart_list.find_elements(By.XPATH, "//div[@class='cart_item']")
-//
-//# Помещаем все элементы cart_item в список
-//        cart_items_list = list(cart_items)
-
-//        if (buttonRemove.isDisplayed()) {
-//            while (true) {
-//                buttonRemove.click();
-//            }
-//        }
-//        if (!buttonRemove.isDisplayed()) {
+        List<WebElement> items = driver.findElements(By.className("cart_item"));
+        if (!items.isEmpty()) {
+            List<WebElement> buttons = driver.findElements(By.xpath("//button[contains(@class, 'btn_secondary')]"));
+            for (WebElement button : buttons) {
+                button.click();
+            }
+        }
         buttonSendwich.click();
         buttonAllitems.click();
         List<WebElement> products = driver.findElements(By.xpath("//div[@class='inventory_item']"));
