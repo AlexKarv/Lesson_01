@@ -21,12 +21,12 @@ public class BaseTest {
     }
 
     public void goToUrl() {
-        goToUrl(ConfigProvider.getInstance().getProperty("app1.base.url"));
+        goToUrl(ConfigProvider.getInstance().getProperty("appHW.base.url"));
 
     }
 
     public void goToPart(String part) {
-        goToUrl(ConfigProvider.getInstance().getProperty("app1.base.url") + part);
+        goToUrl(ConfigProvider.getInstance().getProperty("appHW.base.url") + part);
     }
 
 
@@ -36,31 +36,5 @@ public class BaseTest {
         System.out.println("after class");
     }
 
-//    @BeforeMethod
-//    public void beforeMethod() {
-//
-//        driver.get("https://www.saucedemo.com/v1/index.html");
-//        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-//        WebElement userNameField = driver.findElement(By.id("user-name"));
-//        userNameField.clear();
-//        userNameField.sendKeys(USER_NAME);
-//        WebElement userPasswordField = driver.findElement(By.id("password"));
-//        userPasswordField.clear();
-//        userPasswordField.sendKeys(USER_PASS);
-//        WebElement buttonLoggin = driver.findElement(By.xpath("//input[@id='login-button']"));
-//        buttonLoggin.click();
-//        Assert.assertTrue(driver.findElement(By.xpath("//div[@class='header_secondary_container']")).
-//                getText().contains("Prod"));
-//    }
 
-
-
-
-
-//    public static void logOut() {
-//        WebElement buttonSendwich = driver.findElement(By.xpath("//button[normalize-space()='Open Menu']"));
-//        buttonSendwich.click();
-//        WebElement buttonLogOut = driver.findElement(By.xpath("//a[@id='logout_sidebar_link']"));
-//        buttonLogOut.click();
-    //}
 }
