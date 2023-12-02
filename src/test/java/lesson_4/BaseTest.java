@@ -17,6 +17,7 @@ public class BaseTest {
         // driver = new ChromeDriver();
         //
         //  System.setProperty("browser", "chrome");
+
         driver = WebDriverFactory.getDriver();
         driver.manage().window().maximize();
         System.out.println("before class");

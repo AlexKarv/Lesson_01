@@ -3,37 +3,38 @@ package HM5;
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.WebElement;
+import org.openqa.selenium.chrome.ChromeDriver;
 import org.testng.Assert;
-import org.testng.annotations.BeforeMethod;
+import org.testng.annotations.AfterClass;
+import org.testng.annotations.BeforeClass;
 import org.testng.annotations.Test;
 
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-public class HW5 extends BaseTest {
-   private static WebDriver driver;
+public class HWW5 {
+    private static WebDriver driver;
+
     private static final String USER_NAME = "performance_glitch_user";
     private static final String USER_PASS = "secret_sauce";
-        @BeforeMethod
-        public void beforeMethod() {
-            goToPart("login");
-
-
-            driver.get("https://www.saucedemo.com/v1/index.html");
-            driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
-            WebElement userNameField = driver.findElement(By.id("user-name"));
-            userNameField.clear();
-            userNameField.sendKeys(USER_NAME);
-            WebElement userPasswordField = driver.findElement(By.id("password"));
-            userPasswordField.clear();
-            userPasswordField.sendKeys(USER_PASS);
-            WebElement buttonLoggin = driver.findElement(By.xpath("//input[@id='login-button']"));
-            buttonLoggin.click();
-            Assert.assertTrue(driver.findElement(By.xpath("//div[@class='header_secondary_container']")).
-                    getText().contains("Prod"));
-        }
-
-        @Test
+    @BeforeClass
+    public void beforeClass() {
+        driver = new ChromeDriver();
+        driver.manage().window().maximize();
+        driver.get("https://www.saucedemo.com/v1/index.html");
+        driver.manage().timeouts().implicitlyWait(5, TimeUnit.SECONDS);
+        WebElement userNameField = driver.findElement(By.id("user-name"));
+        userNameField.clear();
+        userNameField.sendKeys(USER_NAME);
+        WebElement userPasswordField = driver.findElement(By.id("password"));
+        userPasswordField.clear();
+        userPasswordField.sendKeys(USER_PASS);
+        WebElement buttonLoggin = driver.findElement(By.xpath("//input[@id='login-button']"));
+        buttonLoggin.click();
+        Assert.assertTrue(driver.findElement(By.xpath("//div[@class='header_secondary_container']")).
+                getText().contains("Prod"));
+    }
+    @Test
     public void loginTestWithXpathPositiveAddToBasket() {
         howProductInBusket();
         Assert.assertTrue(howProductInBusket() == 0);
@@ -49,7 +50,6 @@ public class HW5 extends BaseTest {
         Assert.assertTrue(howProductInBusket() == 2);
         logOut();
     }
-
     public static int howProductInBusket() {
         WebElement buttonBusket = driver.findElement(By.xpath("//*[name()='path' and contains(@fill,'currentCol')]"));
         buttonBusket.click();
@@ -130,9 +130,9 @@ public class HW5 extends BaseTest {
         WebElement buttonLoggin = driver.findElement(By.xpath("//input[@id='login-button']"));
         Assert.assertEquals(buttonLoggin.getAttribute("value"), "LOGIN");
     }
-//    @AfterClass
-//    public void afterClass() {
-//        if (driver != null)
-//            driver.quit();
-//    }
+    @AfterClass
+    public void afterClass() {
+        if (driver != null)
+            driver.quit();
+    }
 }

@@ -1,4 +1,4 @@
-package HM5;
+package HW6;
 
 import org.example.uitests.browser.WebDriwerHolder;
 import org.example.uitests.utils.ConfigProvider;
@@ -9,13 +9,11 @@ import org.testng.annotations.BeforeClass;
 public class BaseTest {
     private static WebDriver driver;
 
-
-
     @BeforeClass
     public void beforeClass() {
         driver = WebDriwerHolder.getInstance().getDriver();
         driver.manage().window().maximize();
-        System.out.println("before class");
+
     }
     public void goToUrl(String url) {
         WebDriwerHolder.getInstance().getDriver().get(url);
@@ -23,12 +21,12 @@ public class BaseTest {
     }
 
     public void goToUrl() {
-        goToUrl(ConfigProvider.getInstance().getProperty("app.base.url"));
+        goToUrl(ConfigProvider.getInstance().getProperty("app1.base.url"));
 
     }
 
     public void goToPart(String part) {
-        goToUrl(ConfigProvider.getInstance().getProperty("app.base.url1") + part);
+        goToUrl(ConfigProvider.getInstance().getProperty("app1.base.url") + part);
     }
 
 

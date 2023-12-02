@@ -1,4 +1,4 @@
-package HM5;
+package HW6;
 
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
@@ -10,15 +10,13 @@ import org.testng.annotations.Test;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
 
-public class HW5 extends BaseTest {
-   private static WebDriver driver;
+public class HW6 extends BaseTest {
+    private static WebDriver driver;
     private static final String USER_NAME = "performance_glitch_user";
     private static final String USER_PASS = "secret_sauce";
         @BeforeMethod
         public void beforeMethod() {
             goToPart("login");
-
-
             driver.get("https://www.saucedemo.com/v1/index.html");
             driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
             WebElement userNameField = driver.findElement(By.id("user-name"));

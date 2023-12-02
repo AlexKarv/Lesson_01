@@ -1,5 +1,6 @@
 package org.example.uitests.browser;
 
+import org.example.uitests.utils.ConfigProvider;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.edge.EdgeDriver;
@@ -31,14 +32,13 @@ public class WebDriverFactory {
 //        return driver;
         Browser browser = null;
         try {
-            browser = Browser.valueOf(System.getProperty("browser", "chrome").toUpperCase());
+//            browser = Browser.valueOf(System.getProperty("browser", "chrome").toUpperCase());
+            browser = Browser.valueOf(ConfigProvider.getInstance().getProperty("browser").toUpperCase());
         } catch (IllegalArgumentException ex) {
             System.out.println("This driver is not supported.\nPlease choose: chrome, edge, firefox");
             System.exit(-1); // Щоб не йшло виконання далі
             }
             return getDriver(browser);
-
-
         }
 
     private static WebDriver getFirefoxDriwer() {

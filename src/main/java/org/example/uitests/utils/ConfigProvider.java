@@ -1,4 +1,4 @@
-package org.example.uitest.utils;
+package org.example.uitests.utils;
 
 import java.io.File;
 import java.io.FileInputStream;
