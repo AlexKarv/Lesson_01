@@ -20,8 +20,9 @@ public class MainPageHW extends BasePage {
     private WebElement buttonInSecondProduct;
     @FindBy(xpath = "//div[3]//div[3]//button[1]")
     private WebElement buttonInThirtProduct;
-//    @FindBy(xpath = "//span[@class='fa-layers-counter shopping_cart_badge']")
-//    private WebElement productInABusket;
+    @FindBy(xpath = "//span[@class='fa-layers-counter shopping_cart_badge']")
+    private WebElement productInABusket;
+
 
 
     public WebElement getNamePage() {
