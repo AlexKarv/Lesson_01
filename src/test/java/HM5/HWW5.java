@@ -51,7 +51,8 @@ public class HWW5 {
         logOut();
     }
     public static int howProductInBusket() {
-        WebElement buttonBusket = driver.findElement(By.xpath("//*[name()='path' and contains(@fill,'currentCol')]"));
+        WebElement buttonBusket = driver.findElement(By.
+                xpath("//*[name()='path' and contains(@fill,'currentCol')]"));
         buttonBusket.click();
         List<WebElement> item = driver.findElements(By.className("cart_item"));
         System.out.println("item.size:              " + item.size());

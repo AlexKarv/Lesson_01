@@ -2,15 +2,14 @@ package org.example.uitests.pages.loginhw;
 
 import org.example.uitests.pages.BasePage;
 import org.example.uitests.pages.mainhw.MainPageHW;
-import org.example.uitests.utils.ConfigProvider;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 public class LoginPageHW extends BasePage {
 
-    private static final String USER_NAME = ConfigProvider.getInstance().getProperty("loginHW.tests.username");
-
-    private static final String USER_PASS = ConfigProvider.getInstance().getProperty("loginHW.tests.password");
+    //    private static final String USER_NAME = ConfigProvider.getInstance().getProperty("loginHW.tests.username");
+//
+//    private static final String USER_PASS = ConfigProvider.getInstance().getProperty("loginHW.tests.password");
     @FindBy(id = "user-name")
     private WebElement userInput;
 
@@ -24,15 +23,15 @@ public class LoginPageHW extends BasePage {
     private WebElement errorMessage;
 
 
-    private LoginPageHW setName() {
+    private LoginPageHW setName(String login) {
         userInput.clear();
-        userInput.sendKeys(USER_NAME);
+        userInput.sendKeys(login);
         return this;
     }
 
-    private LoginPageHW setPass() {
+    private LoginPageHW setPass(String pass) {
         passInput.clear();
-        passInput.sendKeys(USER_PASS);
+        passInput.sendKeys(pass);
         return this;
     }
 
@@ -40,15 +39,15 @@ public class LoginPageHW extends BasePage {
         buttonLogin.click();
     }
 
-    public MainPageHW successfulLogin() {
-        setName()
-                .setPass()
+    public MainPageHW successfulLogin(String login, String pass) {
+        setName(login)
+                .setPass(pass)
                 .clickButtonLogin();
         return new MainPageHW();
     }
-    public LoginPageHW unSuccessfulLogin() {
-        setName()
-                .setPass()
+    public LoginPageHW unSuccessfulLogin(String login, String pass) {
+        setName(login)
+                .setPass(pass + "1")
                 .clickButtonLogin();
         return this;
     }

@@ -2,14 +2,22 @@ package HW6;
 
 import org.example.uitests.pages.loginhw.LoginPageHW;
 import org.example.uitests.pages.mainhw.MainPageHW;
+import org.example.uitests.utils.ConfigProvider;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+
+import java.util.NoSuchElementException;
 
 public class HW6 extends BaseTest {
     //    private static WebDriver driver;
 //    private static final String USER_NAME = "performance_glitch_user";
 //    private static final String USER_PASS = "secret_sauce";
+
+    private static final String USER_NAME = ConfigProvider.getInstance().getProperty("loginHW.tests.username");
+
+    private static final String USER_PASS = ConfigProvider.getInstance().getProperty("loginHW.tests.password");
+
     @BeforeMethod
     public void beforeMethod() {
         goToPart("index.html");
@@ -19,8 +27,7 @@ public class HW6 extends BaseTest {
     @Test
     public void successfulLogin() {
         LoginPageHW loginPageHW = new LoginPageHW();
-        loginPageHW.successfulLogin();
-        MainPageHW mainPageHW = loginPageHW.successfulLogin();
+        MainPageHW mainPageHW = loginPageHW.successfulLogin(USER_NAME, USER_PASS);
         Assert.assertTrue(mainPageHW.getNamePageText().contains("Prod"));
         //(driver.findElement(By.xpath("//div[@class='header_secondary_container']")).
         //   getText().contains("Prod"));
@@ -29,10 +36,31 @@ public class HW6 extends BaseTest {
     @Test
     public void unSuccessfulLogin() {
         LoginPageHW loginPageHW = new LoginPageHW();
-        loginPageHW.unSuccessfulLogin();
-
+        loginPageHW.unSuccessfulLogin(USER_NAME, USER_PASS);
         Assert.assertTrue(loginPageHW.getErrorMassageTextUnSucces().contains("Epic"));
     }
+
+
+    @Test
+    public void checkProductsInBusket() {
+        LoginPageHW loginPageHW = new LoginPageHW();
+        MainPageHW mainPageHW = loginPageHW.successfulLogin(USER_NAME, USER_PASS);
+        try {
+            Assert.assertFalse(mainPageHW.getProductInABusket().isDisplayed());
+        } catch (NoSuchElementException e) {
+        }
+    }
+
+
+
+
+
+
+
+
+
+
+
 
 
 //    @Test

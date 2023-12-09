@@ -51,7 +51,8 @@ public class HW5 extends BaseTest {
     }
 
     public static int howProductInBusket() {
-        WebElement buttonBusket = driver.findElement(By.xpath("//*[name()='path' and contains(@fill,'currentCol')]"));
+        WebElement buttonBusket = driver
+                .findElement(By.xpath("\"//div[3]//div[3]//button[1]\"\"//div[3]//div[3]//button[1]\"\"//div[3]//div[3]//button[1]\"\"//div[3]//div[3]//button[1]\"')]"));
         buttonBusket.click();
         List<WebElement> item = driver.findElements(By.className("cart_item"));
         System.out.println("item.size:              " + item.size());
