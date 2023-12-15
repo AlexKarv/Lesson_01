@@ -1,13 +1,12 @@
 package HW6;
 
+import org.example.uitests.pages.busketpagehw.BusketPageHW;
 import org.example.uitests.pages.loginhw.LoginPageHW;
 import org.example.uitests.pages.mainhw.MainPageHW;
 import org.example.uitests.utils.ConfigProvider;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
-
-import java.util.NoSuchElementException;
 
 public class HW6 extends BaseTest {
     //    private static WebDriver driver;
@@ -40,27 +39,35 @@ public class HW6 extends BaseTest {
         Assert.assertTrue(loginPageHW.getErrorMassageTextUnSucces().contains("Epic"));
     }
 
-
     @Test
-    public void checkProductsInBusket() {
+    public void addProductToBusket() {
         LoginPageHW loginPageHW = new LoginPageHW();
         MainPageHW mainPageHW = loginPageHW.successfulLogin(USER_NAME, USER_PASS);
-        try {
-            Assert.assertFalse(mainPageHW.getProductInABusket().isDisplayed());
-        } catch (NoSuchElementException e) {
-        }
+        mainPageHW.addProductToBasket1(2);
+        BusketPageHW busketPageHW = new BusketPageHW();
+        busketPageHW = mainPageHW.moveToBusketPage();
+        int count = busketPageHW.howProductInBusket();
+        Assert.assertEquals(count,2);
+    }
+    @Test
+    public void chooseRandomProduct() {
+        MainPageHW mainPageHW = new MainPageHW();
+
+
+
     }
 
 
 
-
-
-
-
-
-
-
-
+//    @Test
+//    public void checkProductsInBusket() {
+//        LoginPageHW loginPageHW = new LoginPageHW();
+//        MainPageHW mainPageHW = loginPageHW.successfulLogin(USER_NAME, USER_PASS);
+//        try {
+//            Assert.assertFalse();
+//        } catch (NoSuchElementException e) {
+//        }
+//    }
 
 
 //    @Test
