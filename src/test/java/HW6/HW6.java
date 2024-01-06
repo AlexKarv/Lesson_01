@@ -70,18 +70,19 @@ public class HW6 extends BaseTest {
             throw new RuntimeException(e);
         }
 
-        BusketPageHW busketPageHW = new BusketPageHW();
-        busketPageHW = mp.moveToBusketPage();
+        BusketPageHW busketPageHW = mp.moveToBusketPage();
+
         try {
             Thread.sleep(4000);
         } catch (InterruptedException e) {
             throw new RuntimeException(e);
         }
         System.out.println("--------------------------");
+        busketPageHW.whatIsTheProductInBusket();
         String nameProductInBusket = busketPageHW.getName();
         String priceProductInBusket = busketPageHW.getPrice();
-        System.out.println(nameProductInBusket);
-        System.out.println(priceProductInBusket);
+        System.out.println("-------------------="+nameProductInBusket);
+        System.out.println("======================" + priceProductInBusket);
         try {
             Thread.sleep(4000);
         } catch (InterruptedException e) {
@@ -101,8 +102,8 @@ public class HW6 extends BaseTest {
         System.out.println(productNameWhichWeChose);
         System.out.println(productPriceWhichWeChose);
 
-        BusketPageHW busketPageHW = new BusketPageHW();
-        busketPageHW = mp.moveToBusketPage();
+        BusketPageHW busketPageHW = mp.moveToBusketPage();
+
         MainPageHW mainPageHW = busketPageHW.moveToMainPage();
         String text = mainPageHW.getNamePageText();
 

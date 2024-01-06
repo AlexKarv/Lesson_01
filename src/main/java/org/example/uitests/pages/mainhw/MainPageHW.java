@@ -1,5 +1,6 @@
 package org.example.uitests.pages.mainhw;
 
+import org.example.uitests.browser.WebDriverFactory;
 import org.example.uitests.browser.WebDriwerHolder;
 import org.example.uitests.pages.BasePage;
 import org.example.uitests.pages.busketpagehw.BusketPageHW;
@@ -74,7 +75,7 @@ public class MainPageHW extends BasePage {
     }
 
 
-    @FindBy(xpath = "//div[@class='header_secondary_container']")
+    @FindBy(className = "product_label")
     private WebElement namePage;
 
     @FindBy(xpath = "//*[name()='path' and contains(@fill,'currentCol')]")
@@ -105,6 +106,11 @@ public class MainPageHW extends BasePage {
 
 
     }
+
+//    public void click (String str) {
+//        WebElement webElement = WebDriverFactory.getDriver().findElement(str);
+//
+//    }
 
 
     @FindBy(xpath = "//button[normalize-space()='Open Menu']")
