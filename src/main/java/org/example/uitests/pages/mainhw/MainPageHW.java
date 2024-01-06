@@ -8,15 +8,16 @@ import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class MainPageHW extends BasePage {
     private int number;
     private String url;
     private String name;
-    private double price;
+    private String price;
 
-    public MainPageHW(int number, String url, String name, double price) {
+    public MainPageHW(int number, String url, String name, String price) {
         this.number = number;
         this.url = url;
         this.name = name;
@@ -35,32 +36,37 @@ public class MainPageHW extends BasePage {
         return name;
     }
 
-    public double getPrice() {
+    public String getPrice() {
         return price;
     }
 
-    public static String randomProduct () {
-        MainPageHW product1 = new MainPageHW(1,"//div[normalize-space()='Sauce Labs Backpack']","Sauce Labs Backpack", 29.99);
-        MainPageHW product2 = new MainPageHW(2,"//div[normalize-space()='Sauce Labs Bike Light']","Sauce Labs Bike Light", 9.99);
-        MainPageHW product3 = new MainPageHW(3,"//div[normalize-space()='Sauce Labs Fleece Jacket']","Sauce Labs Bolt T-Shirt", 15.99);
-        MainPageHW product4 = new MainPageHW(4,"//div[normalize-space()='Sauce Labs Fleece Jacket']","Sauce Labs Fleece Jacket", 49.99);
-        MainPageHW product5 = new MainPageHW(5,"//div[normalize-space()='Sauce Labs Onesie']","Sauce Labs Onesie", 7.99);
-        MainPageHW product6 = new MainPageHW(4,"//div[normalize-space()='Test.allTheThings() T-Shirt (Red)']","Test.allTheThings() T-Shirt (Red)", 15.99);
+    public void RandomProduct () {
 
-        ArrayList <MainPageHW> products = new ArrayList<>();
-        products.add(product1);
-        products.add(product2);
-        products.add(product3);
-        products.add(product4);
-        products.add(product5);
-        products.add(product6);
 
-        Random random = new Random();
-        int randomIndex = random.nextInt(products.size());
-        MainPageHW randomProduct = products.get(randomIndex);
-
-        return randomProduct.getUrl();
     }
+
+//    public String randomProduct () {
+//        MainPageHW product1 = new MainPageHW(1,"//div[normalize-space()='Sauce Labs Backpack']","Sauce Labs Backpack", 29.99);
+//        MainPageHW product2 = new MainPageHW(2,"//div[normalize-space()='Sauce Labs Bike Light']","Sauce Labs Bike Light", 9.99);
+//        MainPageHW product3 = new MainPageHW(3,"//div[normalize-space()='Sauce Labs Fleece Jacket']","Sauce Labs Bolt T-Shirt", 15.99);
+//        MainPageHW product4 = new MainPageHW(4,"//div[normalize-space()='Sauce Labs Fleece Jacket']","Sauce Labs Fleece Jacket", 49.99);
+//        MainPageHW product5 = new MainPageHW(5,"//div[normalize-space()='Sauce Labs Onesie']","Sauce Labs Onesie", 7.99);
+//        MainPageHW product6 = new MainPageHW(4,"//div[normalize-space()='Test.allTheThings() T-Shirt (Red)']","Test.allTheThings() T-Shirt (Red)", 15.99);
+//
+//        ArrayList <MainPageHW> products = new ArrayList<>();
+//        products.add(product1);
+//        products.add(product2);
+//        products.add(product3);
+//        products.add(product4);
+//        products.add(product5);
+//        products.add(product6);
+//
+//        Random random = new Random();
+//        int randomIndex = random.nextInt(products.size());
+//        MainPageHW randomProduct = products.get(randomIndex);
+//
+//        return randomProduct.getUrl();
+//    }
 
     public void clickButton(String path) {
         WebElement button = WebDriwerHolder.getInstance().getDriver().findElement(By.xpath(path));
@@ -73,6 +79,32 @@ public class MainPageHW extends BasePage {
 
     @FindBy(xpath = "//*[name()='path' and contains(@fill,'currentCol')]")
     private WebElement buttonBusket;
+
+    @FindBy(className = "inventory_item")
+    private List<WebElement> products;
+
+    public List<WebElement> getMyProducts() {
+        return products;
+    }
+
+    public void clickRandomProduct() {
+
+        // Выбираем случайный товар
+        Random random = new Random();
+        int productIndex = random.nextInt(products.size());
+        WebElement product = products.get(productIndex);
+       // Получаем название товара и цену
+        WebElement nameProduct = product.findElement(By.className("inventory_item_name"));
+        name = nameProduct.getText();
+        WebElement priceElement = product.findElement(By.className("pricebar"));
+        price = priceElement.getText();
+
+        // WebElement buttonToClick = product.findElement(By.xpath("//button[contains(text(),'ADD TO CART')]"));
+        WebElement buttonToClick = product.findElement(By.xpath(".//button[contains(text(),'ADD TO CART')]"));
+        buttonToClick.click();
+
+
+    }
 
 
     @FindBy(xpath = "//button[normalize-space()='Open Menu']")
