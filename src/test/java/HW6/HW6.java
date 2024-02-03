@@ -4,9 +4,12 @@ import org.example.uitests.pages.busketpagehw.BusketPageHW;
 import org.example.uitests.pages.loginhw.LoginPageHW;
 import org.example.uitests.pages.mainhw.MainPageHW;
 import org.example.uitests.utils.ConfigProvider;
+import org.openqa.selenium.WebElement;
 import org.testng.Assert;
 import org.testng.annotations.BeforeMethod;
 import org.testng.annotations.Test;
+
+import java.util.List;
 
 public class HW6 extends BaseTest {
     //    private static WebDriver driver;
@@ -48,16 +51,72 @@ public class HW6 extends BaseTest {
         BusketPageHW busketPageHW = new BusketPageHW();
         busketPageHW = mainPageHW.moveToBusketPage();
         int count = busketPageHW.howProductInBusket();
-        Assert.assertEquals(count,2);
+        Assert.assertEquals(count, 2);
     }
+
+
+    @Test
+    public void test1() {
+        LoginPageHW loginPageHW = new LoginPageHW();
+        MainPageHW mp = loginPageHW.successfulLogin(USER_NAME, USER_PASS);
+        List<WebElement> elements = mp.getMyProducts();
+        mp.clickRandomProduct();
+        String productNameWhichWeChose = mp.getName();
+        String productPriceWhichWeChose = mp.getPrice();
+        System.out.println(productNameWhichWeChose);
+        System.out.println(productPriceWhichWeChose);
+        try {
+            Thread.sleep(4000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
+        BusketPageHW busketPageHW = mp.moveToBusketPage();
+
+        try {
+            Thread.sleep(4000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+        System.out.println("--------------------------");
+        busketPageHW.whatIsTheProductInBusket();
+        String nameProductInBusket = busketPageHW.getName();
+        String priceProductInBusket = busketPageHW.getPrice();
+        System.out.println("-------------------="+nameProductInBusket);
+        System.out.println("======================" + priceProductInBusket);
+        try {
+            Thread.sleep(4000);
+        } catch (InterruptedException e) {
+            throw new RuntimeException(e);
+        }
+
+    }
+
+    @Test
+    public void test2() {
+        LoginPageHW loginPageHW = new LoginPageHW();
+        MainPageHW mp = loginPageHW.successfulLogin(USER_NAME, USER_PASS);
+        List<WebElement> elements = mp.getMyProducts();
+        mp.clickRandomProduct();
+        String productNameWhichWeChose = mp.getName();
+        String productPriceWhichWeChose = mp.getPrice();
+        System.out.println(productNameWhichWeChose);
+        System.out.println(productPriceWhichWeChose);
+
+        BusketPageHW busketPageHW = mp.moveToBusketPage();
+
+        MainPageHW mainPageHW = busketPageHW.moveToMainPage();
+        String text = mainPageHW.getNamePageText();
+
+        System.out.println("-----------" + text);
+        Assert.assertEquals(mainPageHW.getNamePageText(), "Products");
+    }
+
     @Test
     public void chooseRandomProduct() {
         MainPageHW mainPageHW = new MainPageHW();
 
-
-
     }
-
 
 
 //    @Test
