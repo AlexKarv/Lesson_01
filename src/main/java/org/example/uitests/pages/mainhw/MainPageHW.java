@@ -3,8 +3,12 @@ package org.example.uitests.pages.mainhw;
 import org.example.uitests.browser.WebDriwerHolder;
 import org.example.uitests.pages.BasePage;
 import org.example.uitests.pages.busketpagehw.BusketPageHW;
+import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import static org.openqa.selenium.By.xpath;
 
@@ -98,10 +102,10 @@ public class MainPageHW extends BasePage {
     @FindBy(xpath = "//a[@id='logout_sidebar_link']")
     private WebElement buttonLogout;
 
-public BusketPageHW moveToBusketPage () {
-    buttonBusket.click();
-    return new BusketPageHW();
-}
+    public BusketPageHW moveToBusketPage() {
+        buttonBusket.click();
+        return new BusketPageHW();
+    }
 
     public WebElement getNamePage() {
         return namePage;
@@ -131,7 +135,7 @@ public BusketPageHW moveToBusketPage () {
         return buttonInThirtProduct;
     }
 
-//    public WebElement getProductInABusket() {
+    //    public WebElement getProductInABusket() {
 //        return productInABusket;
 //    }
     public MainPageHW addProductToBasket1(int quantityNumbers) {
@@ -163,8 +167,23 @@ public BusketPageHW moveToBusketPage () {
     public String getNamePageText() {
         return namePage.getText();
     }
-    public static void logOut() {
+
+    public List<Product> getProducts() {
+        List<WebElement> items = WebDriwerHolder.getInstance().getDriver().
+                findElements(By.xpath("//*(@class = inventory_item)"));
+        List<Product> productList = new ArrayList<>();
+        String productName;
+        for (WebElement product : items) {
+            productName = product.findElements(By.name("inventory_item_name")).;
+
+        }
+
+        return null;
+    }
 
 
+    public void logOut() {
+        buttonSendwich.click();
+        buttonLogout.click();
     }
 }

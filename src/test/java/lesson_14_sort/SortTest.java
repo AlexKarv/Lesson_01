@@ -3,9 +3,10 @@ package lesson_14_sort;
 import org.example.uitests.pages.loginhw.LoginPageHW;
 import org.example.uitests.pages.mainhw.MainPageHW;
 import org.example.uitests.utils.ConfigProvider;
+import org.testng.annotations.AfterMethod;
 import org.testng.annotations.BeforeMethod;
 
-public class SortTest extends  BaseTest {
+public class SortTest extends BaseTest {
 
     //Зайти на сайт https://www.saucedemo.com/v1/index.html, залогиниться.
 
@@ -24,5 +25,12 @@ public class SortTest extends  BaseTest {
 
 
 
+
+
+    @AfterMethod
+    public void afterMethod() {
+        MainPageHW mainPageHW = new MainPageHW();
+        mainPageHW.logOut();
+    }
 
 }
