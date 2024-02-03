@@ -3,12 +3,10 @@ package org.example.uitests.pages.mainhw;
 import org.example.uitests.browser.WebDriwerHolder;
 import org.example.uitests.pages.BasePage;
 import org.example.uitests.pages.busketpagehw.BusketPageHW;
-import org.openqa.selenium.By;
 import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.FindBy;
 
-import java.util.ArrayList;
-import java.util.Random;
+import static org.openqa.selenium.By.xpath;
 
 public class MainPageHW extends BasePage {
     private int number;
@@ -39,31 +37,31 @@ public class MainPageHW extends BasePage {
         return price;
     }
 
-    public static String randomProduct () {
-        MainPageHW product1 = new MainPageHW(1,"//div[normalize-space()='Sauce Labs Backpack']","Sauce Labs Backpack", 29.99);
-        MainPageHW product2 = new MainPageHW(2,"//div[normalize-space()='Sauce Labs Bike Light']","Sauce Labs Bike Light", 9.99);
-        MainPageHW product3 = new MainPageHW(3,"//div[normalize-space()='Sauce Labs Fleece Jacket']","Sauce Labs Bolt T-Shirt", 15.99);
-        MainPageHW product4 = new MainPageHW(4,"//div[normalize-space()='Sauce Labs Fleece Jacket']","Sauce Labs Fleece Jacket", 49.99);
-        MainPageHW product5 = new MainPageHW(5,"//div[normalize-space()='Sauce Labs Onesie']","Sauce Labs Onesie", 7.99);
-        MainPageHW product6 = new MainPageHW(4,"//div[normalize-space()='Test.allTheThings() T-Shirt (Red)']","Test.allTheThings() T-Shirt (Red)", 15.99);
-
-        ArrayList <MainPageHW> products = new ArrayList<>();
-        products.add(product1);
-        products.add(product2);
-        products.add(product3);
-        products.add(product4);
-        products.add(product5);
-        products.add(product6);
-
-        Random random = new Random();
-        int randomIndex = random.nextInt(products.size());
-        MainPageHW randomProduct = products.get(randomIndex);
-
-        return randomProduct.getUrl();
-    }
+//    public static String randomProduct () {
+//        MainPageHW product1 = new MainPageHW(1,"//div[normalize-space()='Sauce Labs Backpack']","Sauce Labs Backpack", 29.99);
+//        MainPageHW product2 = new MainPageHW(2,"//div[normalize-space()='Sauce Labs Bike Light']","Sauce Labs Bike Light", 9.99);
+//        MainPageHW product3 = new MainPageHW(3,"//div[normalize-space()='Sauce Labs Fleece Jacket']","Sauce Labs Bolt T-Shirt", 15.99);
+//        MainPageHW product4 = new MainPageHW(4,"//div[normalize-space()='Sauce Labs Fleece Jacket']","Sauce Labs Fleece Jacket", 49.99);
+//        MainPageHW product5 = new MainPageHW(5,"//div[normalize-space()='Sauce Labs Onesie']","Sauce Labs Onesie", 7.99);
+//        MainPageHW product6 = new MainPageHW(4,"//div[normalize-space()='Test.allTheThings() T-Shirt (Red)']","Test.allTheThings() T-Shirt (Red)", 15.99);
+//
+//        ArrayList <MainPageHW> products = new ArrayList<>();
+//        products.add(product1);
+//        products.add(product2);
+//        products.add(product3);
+//        products.add(product4);
+//        products.add(product5);
+//        products.add(product6);
+//
+//        Random random = new Random();
+//        int randomIndex = random.nextInt(products.size());
+//        MainPageHW randomProduct = products.get(randomIndex);
+//
+//        return randomProduct.getUrl();
+//    }
 
     public void clickButton(String path) {
-        WebElement button = WebDriwerHolder.getInstance().getDriver().findElement(By.xpath(path));
+        WebElement button = WebDriwerHolder.getInstance().getDriver().findElement(xpath(path));
         button.click();
     }
 
@@ -73,7 +71,6 @@ public class MainPageHW extends BasePage {
 
     @FindBy(xpath = "//*[name()='path' and contains(@fill,'currentCol')]")
     private WebElement buttonBusket;
-
 
     @FindBy(xpath = "//button[normalize-space()='Open Menu']")
     private WebElement buttonSendwich;
@@ -97,6 +94,9 @@ public class MainPageHW extends BasePage {
 //    @FindBy(xpath = "//span[@class='fa-layers-counter shopping_cart_badge']")
 //    private WebElement productInABusket;
 
+
+    @FindBy(xpath = "//a[@id='logout_sidebar_link']")
+    private WebElement buttonLogout;
 
 public BusketPageHW moveToBusketPage () {
     buttonBusket.click();
@@ -162,5 +162,9 @@ public BusketPageHW moveToBusketPage () {
 
     public String getNamePageText() {
         return namePage.getText();
+    }
+    public static void logOut() {
+
+
     }
 }

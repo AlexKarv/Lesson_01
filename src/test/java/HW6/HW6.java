@@ -28,8 +28,9 @@ public class HW6 extends BaseTest {
         LoginPageHW loginPageHW = new LoginPageHW();
         MainPageHW mainPageHW = loginPageHW.successfulLogin(USER_NAME, USER_PASS);
         Assert.assertTrue(mainPageHW.getNamePageText().contains("Prod"));
-        //(driver.findElement(By.xpath("//div[@class='header_secondary_container']")).
-        //   getText().contains("Prod"));
+
+//        (driver.findElement(By.xpath("//div[@class='header_secondary_container']")).
+//           getText().contains("Prod"));
     }
 
     @Test
